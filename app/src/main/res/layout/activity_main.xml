@@ -11,13 +11,13 @@
 
     <TextView
         android:id="@+id/equation"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </TextView>
     <TextView
         android:text="0"
-        android:textSize="50sp"
+        android:textSize="70sp"
         android:textAlignment="textEnd"
         android:id="@+id/result"
         android:layout_marginVertical="10dp"
@@ -54,12 +54,12 @@
 
             <Button
                 android:id="@+id/raise"
-                android:textSize="20sp"
+                android:textSize="30sp"
                 android:layout_marginEnd="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="x^2"></Button>
+                android:text="x²"></Button>
 
             <Button
                 android:id="@+id/half"
@@ -98,7 +98,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_marginEnd="4dp"
-                android:text="←"></Button>
+                android:text="⌫"></Button>
 
             <Button
                 android:id="@+id/divide"
@@ -146,7 +146,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_marginEnd="4dp"
-                android:text="x"></Button>
+                android:text="×"></Button>
         </LinearLayout>
         <LinearLayout
             android:layout_weight="1"
