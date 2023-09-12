@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     // state
-    String resultStr = "";
+    String resultStr = "0";
     double result;
     ArrayList<String> equation = new ArrayList<String>();
 
@@ -134,6 +134,42 @@ public class MainActivity extends AppCompatActivity {
         Equation.setText(equationStr);
     }
 
+
+    void doC() {
+        // update state
+        result = 0;
+        resultStr = "0";
+        Result.setText(resultStr);
+
+        equation.removeAll(equation);
+        Equation.setText("");
+        EquationStr = "";
+
+        Result.setText("0");
+    }
+
+    void doCE() {
+        // determine the index that contains the last operator
+        Integer lastOperIndex = 0;
+
+        for(int i = 0; i<equation.size(); i++){
+            for (String oper: OperStrings) {
+                if (oper.equals(equation.get(i))){
+                    lastOperIndex = i;
+                    break;
+                }
+            }
+        }
+
+        // remove all tokens from lastOperIndex up to the last token
+        for (int i = equation.size() - 1; i >= lastOperIndex; i--) {
+            equation.remove(i);
+        }
+
+        doCompute();
+    }
+
+
     void doCompute() {
         // parse the equation arraylist
         parse();
@@ -158,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             result = 0;
             resultStr = "";
-            Result.setText("");
+            Result.setText(resultStr);
 
             Log.e("ERROR", e.getMessage());
         }
@@ -166,26 +202,6 @@ public class MainActivity extends AppCompatActivity {
         // update UI
         Log.i("RESULT", result+"");
         Result.setText(resultStr);
-    }
-
-    void doC() {
-        // update state
-        result = 0;
-        resultStr = "";
-        Result.setText("");
-
-        equation.removeAll(equation);
-        Equation.setText("");
-        EquationStr = "";
-
-        Result.setText("0");
-    }
-
-    void doCE() {
-        // update state
-        result = 0;
-        resultStr = "";
-        Result.setText("");
     }
 
     @Override
@@ -208,7 +224,7 @@ public class MainActivity extends AppCompatActivity {
         Button CButton = findViewById(R.id.c);
         DotButton.setOnClickListener(view -> insertDot());
         BackspaceButton.setOnClickListener(view -> doBackspace());
-//        CEButton.setOnClickListener(view -> doCE());
+        CEButton.setOnClickListener(view -> doCE());
         CButton.setOnClickListener(view -> doC());
 
         // assign number buttons
