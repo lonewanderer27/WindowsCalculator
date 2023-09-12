@@ -265,6 +265,7 @@ public class MainActivity extends AppCompatActivity {
                 resultStr = "";
             }
 
+            // remove trailing .0 if it's unnecessary
             if (resultStr.endsWith(".0")) {
                 resultStr = resultStr.substring(0, resultStr.length() -2);
             }
