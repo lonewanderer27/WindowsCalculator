@@ -50,11 +50,14 @@ public class MainActivity extends AppCompatActivity {
             Log.i("BEFORE REMOVE", equation.toString());
             // equation size is 1, then remove all tokens
             if (equation.size() == 1) {
+                Log.i("INFO", "Equation size is 1");
                 equation.clear();
             } else {
+                Log.i("INFO", "Equation size is not 1");
                 // otherwise remove the last item
                 Integer lastItemIndex = equation.size() - 1;
-                equation.remove(lastItemIndex+"");
+                Boolean removedItem = equation.remove(lastItemIndex);
+                Log.i("REMOVED", removedItem+"");
             }
 
             Log.i("AFTER REMOVE", equation.toString());
