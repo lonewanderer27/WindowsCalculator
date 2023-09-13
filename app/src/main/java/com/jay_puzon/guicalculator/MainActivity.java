@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
             "/2",
     };
 
+
     // state
     String resultStr = "0";
     double result;
