@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import org.nfunk.jep.JEP;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     // initialize parser
@@ -21,8 +22,7 @@ public class MainActivity extends AppCompatActivity {
             "%",
             "**2",
             "/2",
-    };  
-
+    };
 
     // state
     String resultStr = "0";
@@ -35,6 +35,12 @@ public class MainActivity extends AppCompatActivity {
     String EquationStr = "";
 
     void insertDot() {
+        if (equation.size() == 0) {
+            equation.add("0");
+            equation.add(".");
+            return;
+        }
+
         // only add dot if the last character is not a dot
         if (equation.get(equation.size()-1) != ".") {
             equation.add(".");
@@ -49,16 +55,16 @@ public class MainActivity extends AppCompatActivity {
             Log.i("INFO", "BACKSPACE");
             Log.i("BEFORE REMOVE", equation.toString());
             // equation size is 1, then remove all tokens
-            if (equation.size() == 1) {
-                Log.i("INFO", "Equation size is 1");
-                equation.clear();
-            } else {
-                Log.i("INFO", "Equation size is not 1");
-                // otherwise remove the last item
+//            if (equation.size() == 1) {
+//                Log.i("INFO", "Equation size is 1");
+//                equation.clear();
+//            } else {
+//                Log.i("INFO", "Equation size is not 1");
+//                // otherwise remove the last item
                 Integer lastItemIndex = equation.size() - 1;
-                Boolean removedItem = equation.remove(lastItemIndex);
-                Log.i("REMOVED", removedItem+"");
-            }
+                Log.i("LAST ITEM INDEX", lastItemIndex+"");
+                equation.remove(equation.size() - 1);
+//            }
 
             Log.i("AFTER REMOVE", equation.toString());
         } else {
@@ -81,13 +87,14 @@ public class MainActivity extends AppCompatActivity {
         doCompute();
     }
 
-    void addOper(String newOper) {
-        // get the last character in equation array
+    Boolean isOperatorFound() {
+        Boolean operatorFound = false;
+
         Integer lastItemIndex = equation.size() - 1;
         String lastItem = equation.get(lastItemIndex);
 
         // test if the last character is an operator
-        Boolean operatorFound = false;
+        operatorFound = false;
 
         // loop over the array of operator strings
         for (String oper : OperStrings) {
@@ -98,15 +105,34 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        if (operatorFound) {
-            // if operator is found, then replace it in the equation array
-            equation.set(lastItemIndex, newOper);
-        } else {
-            // otherwise, just add the operator
-            equation.add(newOper);
+        return operatorFound;
+    }
+
+    void addOper(String newOper) {
+        // only allow - to be put when the equation is empty
+        if (newOper.equals("-") && equation.size() == 0) {
+            equation.add("-");
+            doCompute();
+            return;
         }
 
-        doCompute();
+        if (equation.size() != 0) {
+            // get the last character in equation array
+            Integer lastItemIndex = equation.size() - 1;
+            String lastItem = equation.get(lastItemIndex);
+
+            Boolean operatorFound = isOperatorFound();
+
+            if (operatorFound) {
+                // if operator is found, then replace it in the equation array
+                equation.set(lastItemIndex, newOper);
+            } else {
+                // otherwise, just add the operator
+                equation.add(newOper);
+            }
+
+            doCompute();
+        }
     }
 
     void parse() {
@@ -184,11 +210,6 @@ public class MainActivity extends AppCompatActivity {
             jep.parseExpression(EquationStr);
             result = jep.getValue();
             resultStr = String.valueOf(result);
-
-            // if the computed value is 0.0, then just erase the resultStr
-            if (result == 0.0) {
-                resultStr = "";
-            }
 
             // remove trailing .0 if it's unnecessary
             if (resultStr.endsWith(".0")) {
