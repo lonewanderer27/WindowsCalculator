@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("INFO", "Equation size is not 1");
                 // otherwise remove the last item
                 Integer lastItemIndex = equation.size() - 1;
+                Log.i("LAST ITEM INDEX", lastItemIndex+"");
                 Boolean removedItem = equation.remove(lastItemIndex);
                 Log.i("REMOVED", removedItem+"");
             }
