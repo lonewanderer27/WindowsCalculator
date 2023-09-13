@@ -36,6 +36,12 @@ public class MainActivity extends AppCompatActivity {
     String EquationStr = "";
 
     void insertDot() {
+        if (equation.size() == 0) {
+            equation.add("0");
+            equation.add(".");
+            return;
+        }
+
         // only add dot if the last character is not a dot
         if (equation.get(equation.size()-1) != ".") {
             equation.add(".");
@@ -82,13 +88,14 @@ public class MainActivity extends AppCompatActivity {
         doCompute();
     }
 
-    void addOper(String newOper) {
-        // get the last character in equation array
+    Boolean isOperatorFound() {
+        Boolean operatorFound = false;
+
         Integer lastItemIndex = equation.size() - 1;
         String lastItem = equation.get(lastItemIndex);
 
         // test if the last character is an operator
-        Boolean operatorFound = false;
+        operatorFound = false;
 
         // loop over the array of operator strings
         for (String oper : OperStrings) {
@@ -99,15 +106,34 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        if (operatorFound) {
-            // if operator is found, then replace it in the equation array
-            equation.set(lastItemIndex, newOper);
-        } else {
-            // otherwise, just add the operator
-            equation.add(newOper);
+        return operatorFound;
+    }
+
+    void addOper(String newOper) {
+        // only allow - to be put when the equation is empty
+        if (newOper.equals("-") && equation.size() == 0) {
+            equation.add("-");
+            doCompute();
+            return;
         }
 
-        doCompute();
+        if (equation.size() != 0) {
+            // get the last character in equation array
+            Integer lastItemIndex = equation.size() - 1;
+            String lastItem = equation.get(lastItemIndex);
+
+            Boolean operatorFound = isOperatorFound();
+
+            if (operatorFound) {
+                // if operator is found, then replace it in the equation array
+                equation.set(lastItemIndex, newOper);
+            } else {
+                // otherwise, just add the operator
+                equation.add(newOper);
+            }
+
+            doCompute();
+        }
     }
 
     void parse() {
