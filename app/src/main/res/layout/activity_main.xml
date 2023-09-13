@@ -7,20 +7,15 @@
     android:layout_gravity="center_vertical"
     android:orientation="vertical"
     android:padding="10sp"
-    android:screenOrientation="portrait"
     tools:context=".MainActivity">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="200dp">
         <TextView
             android:id="@+id/equation"
-            android:layout_gravity="bottom"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:textAlignment="textEnd"
+            android:gravity="bottom"
             android:textSize="30sp"></TextView>
-    </ScrollView>
 
     <TextView
         android:id="@+id/result"
@@ -29,6 +24,7 @@
         android:layout_marginVertical="10dp"
         android:text="0"
         android:textAlignment="textEnd"
+        android:singleLine="true"
         android:textSize="65sp"></TextView>
 
     <LinearLayout
@@ -115,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="/"
+                android:text="÷"
                 android:textSize="30sp"></Button>
         </LinearLayout>
 
