@@ -115,13 +115,15 @@
                 android:text="⌫"
                 android:textSize="40sp"></Button>
 
+
             <Button
-                android:id="@+id/divide"
+                android:id="@+id/modulo"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginEnd="4dp"
                 android:layout_weight="1"
+                android:text="%"
                 app:cornerRadius="10dp"
-                android:text="/"
                 android:textSize="40sp"></Button>
         </LinearLayout>
 
@@ -159,16 +161,15 @@
                 android:text="9"
                 app:cornerRadius="10dp"
                 android:textSize="40sp"></Button>
-
             <Button
-                android:id="@+id/multiply"
+                android:id="@+id/divide"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginEnd="4dp"
                 android:layout_weight="1"
                 app:cornerRadius="10dp"
-                android:text="×"
+                android:text="/"
                 android:textSize="40sp"></Button>
+
         </LinearLayout>
 
         <LinearLayout
@@ -206,14 +207,16 @@
                 android:text="6"
                 android:textSize="40sp"></Button>
 
+
+
             <Button
-                android:id="@+id/subtract"
+                android:id="@+id/multiply"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginEnd="2dp"
+                android:layout_marginEnd="4dp"
                 android:layout_weight="1"
-                android:text="-"
                 app:cornerRadius="10dp"
+                android:text="×"
                 android:textSize="40sp"></Button>
         </LinearLayout>
 
@@ -253,13 +256,13 @@
                 android:textSize="40sp"></Button>
 
             <Button
-                android:id="@+id/addition"
+                android:id="@+id/subtract"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginEnd="4dp"
-                app:cornerRadius="10dp"
+                android:layout_marginEnd="2dp"
                 android:layout_weight="1"
-                android:text="+"
+                android:text="-"
+                app:cornerRadius="10dp"
                 android:textSize="40sp"></Button>
         </LinearLayout>
 
@@ -309,14 +312,15 @@
                 android:textSize="40sp"></Button>
 
             <Button
-                android:id="@+id/modulo"
+                android:id="@+id/addition"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="4dp"
-                android:layout_weight="1"
-                android:text="%"
                 app:cornerRadius="10dp"
+                android:layout_weight="1"
+                android:text="+"
                 android:textSize="40sp"></Button>
+
         </LinearLayout>
     </LinearLayout>
 </androidx.appcompat.widget.LinearLayoutCompat>
