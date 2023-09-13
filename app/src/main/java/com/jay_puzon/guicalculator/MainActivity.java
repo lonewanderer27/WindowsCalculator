@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import org.nfunk.jep.JEP;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     // initialize parser
@@ -49,17 +50,16 @@ public class MainActivity extends AppCompatActivity {
             Log.i("INFO", "BACKSPACE");
             Log.i("BEFORE REMOVE", equation.toString());
             // equation size is 1, then remove all tokens
-            if (equation.size() == 1) {
-                Log.i("INFO", "Equation size is 1");
-                equation.clear();
-            } else {
-                Log.i("INFO", "Equation size is not 1");
-                // otherwise remove the last item
+//            if (equation.size() == 1) {
+//                Log.i("INFO", "Equation size is 1");
+//                equation.clear();
+//            } else {
+//                Log.i("INFO", "Equation size is not 1");
+//                // otherwise remove the last item
                 Integer lastItemIndex = equation.size() - 1;
                 Log.i("LAST ITEM INDEX", lastItemIndex+"");
-                Boolean removedItem = equation.remove(lastItemIndex);
-                Log.i("REMOVED", removedItem+"");
-            }
+                equation.remove(equation.size() - 1);
+//            }
 
             Log.i("AFTER REMOVE", equation.toString());
         } else {
@@ -185,11 +185,6 @@ public class MainActivity extends AppCompatActivity {
             jep.parseExpression(EquationStr);
             result = jep.getValue();
             resultStr = String.valueOf(result);
-
-            // if the computed value is 0.0, then just erase the resultStr
-            if (result == 0.0) {
-                resultStr = "";
-            }
 
             // remove trailing .0 if it's unnecessary
             if (resultStr.endsWith(".0")) {
