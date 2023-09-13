@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
         if (equation.size() == 0) {
             equation.add("0");
             equation.add(".");
-            return;
         }
 
         // only add dot if the last character is not a dot
@@ -141,10 +140,18 @@ public class MainActivity extends AppCompatActivity {
 
         // loop over each number / operator
         // then appending it to equationStr
+        Integer currentIndex = 0;
         for (String token: equation) {
             // if the token is a dot, then just append it
             if (token.equals(".")) {
-                equationStr += token;
+                // if it's the first entry
+                if (currentIndex == 0) {
+                    // add 0 to the front
+                    equationStr += "0.";
+                } else {
+                    // otherwise, just add the dot
+                    equationStr += ".";
+                }
                 continue;
             }
 
@@ -157,6 +164,9 @@ public class MainActivity extends AppCompatActivity {
                 // so we add a space before and after the operator
                 equationStr += " " + token + " ";
             }
+
+            // increase the iterator of foreach loop
+            currentIndex++;
         }
 
         EquationStr = equationStr;
